@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue实例生命周期函数</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+    <div id="app">{{message}}</div>
+    <script>
+        //生命周期函数就是在某一个时间点自动执行的函数
+        var app=new Vue({
+            el:'#app',
+            data:{
+                message:'hello world!'
+            },
+           // template:'<div>hello world!</div>',
+            //初始化前执行
+            beforeCreate:function(){
+                console.log('beforeCreate');
+            },
+            //初始化完成执行
+            created:function(){
+                console.log('created');
+            },
+            //页面数据挂载之前执行
+            beforeMount:function(){
+                console.log('beforeMount');
+                console.log(this.$el);
+            },
+            //页面挂载之后执行
+            mounted:function(){
+                console.log('mounted');
+                console.log(this.$el);
+            },
+            //实例被销毁之前执行
+            beforeDestroy:function(){
+                console.log('beforeDestroy');
+            },
+            //实例完全被销毁之后执行
+            destroyed:function(){
+                console.log('destroyed');
+            },
+            //数据被修改，还未渲染之前执行
+            beforeUpdate:function(){
+                console.log('beforeUpdate');
+            },
+            //数据被改变渲染之后执行
+            updated:function(){
+                console.log('updated');
+            }
+        });
+    </script>
+</body>
+</html>

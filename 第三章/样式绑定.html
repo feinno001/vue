@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VUE中的样式绑定</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div @click="handleDivClick1" :class="{activated:isActivated}">hello world!</div>
+        <div @click="handleDivClick2" :class="[activated1]">hello world!</div>
+        <div @click="handleDivClick3" :style="styleObj">hello world!</div>
+    </div>
+    <style>
+            .activated  {
+                color: brown;
+            }
+        </style>
+    <script>
+        var app=new Vue({
+            el:"#app",
+            data:{
+                isActivated:false,
+                activated1:'',
+                styleObj:{
+                    'color':'black'
+                }
+            },
+            methods:{
+                handleDivClick1:function(){
+                    //绑定class，通过对象操作
+                    this.isActivated=!this.isActivated
+                },
+                handleDivClick2:function(){
+                    //绑定class，通过数组操作
+                    this.activated1=this.activated1=='activated'?'':'activated';
+                },
+                handleDivClick3:function(){
+                    //通过style内联样式处理
+                    this.styleObj.color=this.styleObj.color=='black'?'red':'black';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

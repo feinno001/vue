@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TodoList</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <input type="text" v-model='inputValue' />
+            <button @click="handleBtnClick">add</button>
+        </div>
+        <ul>
+            <todo-item v-for="(item,index) in list" 
+                :key='index'
+                :content="item" 
+                :index="index" 
+                @delete="handleItemDelete">
+            </todo-item>
+        </ul>
+    </div>
+    <script>
+        //全局组件
+        // Vue.component('TodoItem',{
+        //     props:['content'],
+        //     template:"<li>{{this.content}}</li>"
+        // });
+        //局部组建
+        var TodoItem = {
+            props: ['content', 'index'],
+            template: "<li @click='handleItemClick'>{{this.content}}</li>",
+            methods: {
+                handleItemClick: function () {
+                    //调用父组件绑定的方法并传参
+                    this.$emit('delete', this.index);
+                }
+            }
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                list: [],
+                inputValue: ''
+            },
+            components: {
+                TodoItem: TodoItem
+            },
+            methods: {
+                handleBtnClick: function () {
+                    this.list.push(this.inputValue);
+                    this.inputValue = '';
+                },
+                handleItemDelete: function (index) {
+                    this.list.splice(index, 1);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
