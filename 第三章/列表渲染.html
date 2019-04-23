@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,39 @@
     <title>列表渲染</title>
     <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
 </head>
+
 <body>
     <div id='app'>
-        <div>
-        </div>
+        <!--如果在一个div显示多个标签，而不想使用div，可以使用template,但是不要出现:key-->
+        <template v-for='(item,index) of list'>
+            <!-- <div v-for='(item,index) of list' :key="item.id">  -->
+            <!--key尽量不要用index，使用后端方法数据的id等-->
+            <div>
+                编号：{{item.id}}
+                姓名：{{item.name}}
+            </div>
+            <span>姓名：{{item.name}}</span>
+            <!--v-for也可以循环对象-->
+            <div v-for='(value,key) of listObj'>
+                <p>{{key}}-{{value}}</p>
+            </div>
+            <!-- </div> -->
+        </template>
     </div>
     <script>
-        var app=new Vue({
-            el:'#app',
-            data:{
-                message:'Hello World!',
-                isShow:'a'
+        var app = new Vue({
+            el: '#app',
+            data: {
+                //push() pop() shift() unshift() splice() sort() reverse()
+                list: [{ id: 1, name: '陈海勇' }, { id: 2, name: '王勇强' }, { id: 3, name: '翟志龙' }, { id: 4, name: '杨莉莉' }],
+                listObj: {
+                    id: 1,
+                    name: '段宁',
+                    age: 30
+                }
             }
         })
     </script>
 </body>
+
 </html>

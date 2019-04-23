@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>set方法</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <div v-for='(value,key,index) of userInfo'>
+                {{key}}---{{value}}--{{index}}
+            </div>
+            <button @click='handleBtnClick'>直接add</button>
+            <button @click='handleSetClick'>set增加</button>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                userInfo: {
+                    id: 1,
+                    name: '段宁',
+                    age: 30
+                }
+            },
+            methods:{
+                //直接通过对象，无法增加
+                handleBtnClick:function(){
+                    this.userInfo.sex='男'
+                },
+                //通过set增加可以成功
+                handleSetClick:function(){
+                    Vue.set(app.userInfo,'sex','男')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
