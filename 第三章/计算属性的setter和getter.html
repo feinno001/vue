@@ -12,7 +12,7 @@
 <body>
     <div id="app">
         <p>单价：<input type="number" v-model="price" /></p>
-        <p>数量：<input type="number" v-model="num" /></p>
+        <p>数量：{{num}}</p>
         <p>总价：{{sum}}</p>
     </div>
     <script>
@@ -20,7 +20,7 @@
             el: '#app',
             data: {
                 price: 0,
-                num: 0
+                num: 5
             },
             //计算属性，内置缓存
             computed: {
@@ -31,7 +31,7 @@
                     },
                     //计算属性值改变调用,不是有计算属性改变值
                     set:function(value){
-                        console.log(value);
+                        this.price=value/this.num
                     }
 
                 }

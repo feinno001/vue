@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父子组件传值</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <Count :count='0' @inc='handleIncrese'></Count>
+        <Count :count='1' @inc='handleIncrese'></Count>
+        <div>{{total}}</div>
+    </div>
+    <script>
+        var Count={
+            //子组件通过props获取父组件传递的值
+            props:['count'],
+            data:function(){
+                return{
+                    number:this.count
+                }
+            },
+            template:'<div @click="handleClick">{{number}}</div>',
+            methods:{
+                handleClick:function(){
+                    this.number++;
+                    //通过触发父组件绑定的方法修改父组件数据
+                    this.$emit('inc',1);
+                }
+            }
+        }
+        var app=new Vue({
+            el:'#app',
+            data:{
+                total:1
+            },
+            components:{
+                Count:Count
+            },
+            methods:{
+                handleIncrese(step){
+                    this.total+=step;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

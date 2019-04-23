@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件参数校验和非props特性</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <Child content='Hello World!'></Child>
+    </div>
+    <script>
+        var Child={
+            props:['content'],
+            template:'<div>{{content}}</div>'
+        }
+        var app=new Vue({
+            el:'#app',
+            data:{
+
+            },
+            components:{
+                Child:Child
+            }
+        })
+    </script>
+</body>
+</html>
