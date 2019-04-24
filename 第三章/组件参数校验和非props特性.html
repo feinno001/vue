@@ -9,11 +9,19 @@
 </head>
 <body>
     <div id='app'>
-        <Child content='Hello World!'></Child>
+        <Child></Child>
     </div>
     <script>
         var Child={
-            props:['content'],
+            props:{
+                //key是参数，value是参数类型，可以是多种类型，也可以是对象
+                //content:[Number,String]
+                content:{
+                    type:[Number,String],
+                    required:false,
+                    default:'default value'
+                }
+            },
             template:'<div>{{content}}</div>'
         }
         var app=new Vue({
