@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue中的插槽</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <Child>
+            <div>guowenhuan</div>
+        </Child>
+        <Child1>
+            <div slot='header'>header</div>
+            <div slot='footer'>footer</div>
+        </Child1>
+    </div>
+    <script>
+        var Child = {
+            //slot中设置默认值，如果组件不赋值，就显示默认值
+            template: `<div>
+                        <slot>默认值</slot>
+                    </div>
+                    `
+        }
+        var Child1 = {
+            //slot具名插槽，可以按照名称插入对应内容
+            template: `<div>
+                        <slot name='header'></slot>
+                        <div>content</div>
+                        <slot name='footer'></slot>
+                    </div>
+                    `
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {},
+            components: {
+                Child,
+                Child1
+            }
+        })
+    </script>
+</body>
+
+</html>
