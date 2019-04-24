@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue中的插槽</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <Child>
+            <template slot-scope='props'>
+                <h3>{{props.item}}</h3>
+            </template>
+        </Child>
+    </div>
+    <script>
+        var Child = {
+            data:function(){
+                return{
+                    list:[1,2,3,4,5,6]
+                }
+            },
+            template: `<div>
+                        <ul>
+                            <slot v-for='item of list' :item='item'></slot>
+                        </ul>
+                    </div>
+                    `
+        } 
+        var app = new Vue({
+            el: '#app',
+            data: {},
+            components: {
+                Child
+            }
+        })
+    </script>
+</body>
+
+</html>
