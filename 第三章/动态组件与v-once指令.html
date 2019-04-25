@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态组件与v-once指令</title>
+    <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- 动态组件，通过:is判断type，显示组件-->
+        <component :is='type'></component>
+        <!-- 下面写法等价于动态组件，但是每次都是创建和销毁，浪费性能，建议使用动态组件，也可增加v-once，把组件加入缓存-->
+        <One v-if="type=='one'" v-once></One>
+        <Two v-if="type=='two'" v-once></Two>
+
+        <button @click='handleBtnChange'>change</button>
+    </div>
+    <script>
+        var One = {
+            template: '<div>one</div>'
+        }
+        var Two = {
+            template: '<div>two</div>'
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                type: 'one'
+            },
+            components: {
+                One,
+                Two
+            },
+            methods: {
+                handleBtnChange: function () {
+                    this.type=(this.type=='one'?'two':'one');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
