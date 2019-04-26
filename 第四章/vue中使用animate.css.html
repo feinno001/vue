@@ -7,23 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vue中的css动画原理</title>
     <script src="https://lib.baomitu.com/vue/2.6.10/vue.js"></script>
-
+    <link rel="stylesheet" type='text/css' href="./animate.css">
 </head>
-
 <body>
-    <style>
-        #过渡动画 .fade-enter,
-        .fade-leave-to {
-            opacity: 0;
-        }
-
-        .fade-enter-active,
-        .fade-leave-active {
-            transition: opacity 3s;
-        }
-    </style>
     <div id='app'>
-        <transition name='fade'>
+        <transition 
+            name='fade'
+            enter-active-class='animated swing'
+            leave-active-class='animated shake'
+        >
             <div v-if='show'>HelloWorld!</div>
         </transition>
         <button @click='handleBtnClick'>切换</button>
